@@ -1,2 +1,2 @@
 json_path: '/Users/emilshafeev/Work/Dev learn/golang/Den_task1/public/denchik_data.json'
-port: '8080'
+port: ':8080'
