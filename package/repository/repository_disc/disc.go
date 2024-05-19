@@ -7,19 +7,32 @@ import (
 )
 
 type Disc struct {
-	settings DiscSettings
-}
-
-type DiscSettings struct {
 	SendAllwaysError bool
 }
 
-func NewDisc(settings DiscSettings) *Disc {
-	return &Disc{settings: settings}
+type Option func(*Disc)
+
+func NewDisc(opts ...Option) *Disc {
+
+	d := &Disc{
+		SendAllwaysError: false,
+	}
+
+	for _, opt := range opts {
+		opt(d)
+	}
+
+	return d
+}
+
+func WithAllwaysError(flag bool) Option {
+	return func(d *Disc) {
+		d.SendAllwaysError = flag
+	}
 }
 
 func (d *Disc) ReadJSONFromFile(path string) ([]byte, error) {
-	if d.settings.SendAllwaysError {
+	if d.SendAllwaysError {
 		return nil, errors.New("forced error")
 	}
 

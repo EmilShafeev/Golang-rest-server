@@ -22,7 +22,9 @@ func main() {
 		log.Fatalf("error initializing configs: %s", err.Error())
 	}
 
-	repository := repository.NewDiscRepository(repository_disc.DiscSettings{SendAllwaysError: false})
+	repository := repository.NewDiscRepository(
+		repository_disc.NewDisc(repository_disc.WithAllwaysError(false)),
+	)
 	service := service.NewService(repository)
 	handler := handler.NewHandler(service)
 

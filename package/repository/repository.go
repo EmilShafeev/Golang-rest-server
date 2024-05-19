@@ -13,8 +13,7 @@ type Repository struct {
 	DenchickData
 }
 
-func NewDiscRepository(settings repository_disc.DiscSettings) *Repository {
-	disc := repository_disc.NewDisc(settings)
+func NewDiscRepository(disc *repository_disc.Disc) *Repository {
 	return &Repository{
 		DenchickData: repository_disc.NewDenchickDataDisk(disc),
 	}
